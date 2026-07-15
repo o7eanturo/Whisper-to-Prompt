@@ -82,13 +82,13 @@ struct VoiceCodexControlView: View {
                 VStack(alignment: .leading, spacing: 7) {
                     Label("Sage „Codex“, „Test“ oder „Start“", systemImage: "1.circle")
                     Label("Diktiere deine Anfrage", systemImage: "2.circle")
-                    Label("Sage „Over“/„Ende“ zum Einfügen oder „Submit“ zum Senden", systemImage: "3.circle")
+                    Label("„Over“/„Ende“ beendet; „Submit“ drueckt im Codex-Chat auf Senden", systemImage: "3.circle")
                 }
                 .font(.callout)
                 .padding(.vertical, 4)
             }
 
-            Text("Lokale Erkennung nutzt das bereits installierte Handy-Modell. VS Code muss nur laufen und wird bei ‘Submit’ aktiviert.")
+            Text("Lokale Erkennung nutzt das installierte Handy-Modell. Klicke nach dem Start in das gewünschte Feld in VS Code; jeder erkannte Sprechabschnitt wird dort eingefuegt.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }

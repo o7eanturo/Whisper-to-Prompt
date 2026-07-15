@@ -25,6 +25,11 @@ public actor AssistantSession {
             reset(to: .sleeping)
         case (.dictating, .dictation(let text)) where !text.isEmpty:
             append(text)
+            // Insert completed speech turns immediately. This keeps the text
+            // visible in the currently focused field while dictation remains
+            // active. "Over" merely ends dictation; it must not paste the
+            // whole draft a second time.
+            try await chat.insert(prompt: text)
         case (.dictating, .clear):
             draft = ""
             try await chat.clear()
@@ -32,11 +37,9 @@ public actor AssistantSession {
             reset(to: .waiting)
         case (.dictating, .finish):
             guard !draft.isEmpty else { throw AssistantError.noPromptToSubmit }
-            try await chat.insert(prompt: draft)
             reset(to: .waiting)
         case (.dictating, .submit):
             guard !draft.isEmpty else { throw AssistantError.noPromptToSubmit }
-            try await chat.insert(prompt: draft)
             try await chat.submit()
             reset(to: .waiting)
         case (.dictating, .continue):

@@ -2,7 +2,7 @@ import Testing
 @testable import VoiceCodexCore
 
 struct AssistantSessionTests {
-    @Test func wakeDictateSubmitSendsExactlyOnePrompt() async throws {
+    @Test func wakeDictateSubmitInsertsSpeechTurnsLiveAndSubmitsOnce() async throws {
         let chat = SpyChatController()
         let session = AssistantSession(chat: chat)
         try await session.receive(transcript: "Codex", isFinal: true)
@@ -11,6 +11,18 @@ struct AssistantSessionTests {
 
         #expect(await chat.insertedPrompts() == ["Erstelle eine Komponente"])
         #expect(await chat.submitCount() == 1)
+        #expect(await session.state == .waiting)
+    }
+
+    @Test func overEndsDictationWithoutInsertingTheDraftAgain() async throws {
+        let chat = SpyChatController()
+        let session = AssistantSession(chat: chat)
+        try await session.receive(transcript: "Codex", isFinal: true)
+        try await session.receive(transcript: "Schreibe einen Test", isFinal: true)
+        try await session.receive(transcript: "Over", isFinal: true)
+
+        #expect(await chat.insertedPrompts() == ["Schreibe einen Test"])
+        #expect(await chat.submitCount() == 0)
         #expect(await session.state == .waiting)
     }
 

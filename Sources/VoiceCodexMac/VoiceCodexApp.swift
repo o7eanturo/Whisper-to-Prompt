@@ -165,7 +165,7 @@ final class AssistantRuntime: ObservableObject {
     private func label(for state: AssistantState) -> String {
         switch state {
         case .waiting: "Warte lokal auf ‘Codex’"
-        case .dictating: "Prompt wird aufgenommen — sage ‘Submit’ oder ‘Absenden’"
+        case .dictating: "Prompt wird live eingefuegt — sage ‘Over’ oder ‘Ende’ zum Beenden"
         case .sleeping: "Schlafmodus"
         }
     }
@@ -229,7 +229,7 @@ final class AssistantRuntime: ObservableObject {
                 }
             }
             isTransitioning = false
-            status = "Prompt wird aufgenommen — sage ‘Submit’ oder ‘Absenden’"
+            status = "Prompt wird live eingefuegt — sage ‘Over’ oder ‘Ende’ zum Beenden"
         } catch {
             isTransitioning = false
             isRunning = false

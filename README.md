@@ -15,7 +15,7 @@ This is a beta build. Text insertion into input fields such as VS Code, Codex ch
 1. Waiting mode for a wake word like `Codex`, `Test`, or `Start`
 2. Dictation mode for your actual prompt
 
-When you finish speaking, the app can insert the recognized text into the last focused input field and optionally submit it.
+Each recognized speech segment is inserted into the focused input field while you dictate. Say `Over` or `Ende` to stop dictation. `Submit` presses the Chat send button when it is exposed by VS Code, with `Cmd+Enter` as the VS Code fallback.
 
 ## Current Voice Flow
 
@@ -25,7 +25,7 @@ When you finish speaking, the app can insert the recognized text into the last f
 4. Say `Codex`, `Test`, or `Start`
 5. Dictate your prompt in German or English
 6. Say `Over`, `End`, `Ende`, or `Fertig`
-7. The app pastes the text into the previously focused input
+7. Each completed speech segment is pasted live into the focused input
 
 Optional commands:
 
