@@ -21,6 +21,7 @@ Works in German and English. Your audio stays on your Mac. 🔒
 
 ```sh
 brew tap o7eanturo/tap
+brew trust o7eanturo/tap
 brew install --cask whisper-to-prompt
 ```
 

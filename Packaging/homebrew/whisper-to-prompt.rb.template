@@ -8,7 +8,7 @@ cask "whisper-to-prompt" do
   homepage "https://github.com/o7eanturo/Whisper-to-Prompt"
 
   depends_on arch: :arm64
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "VoiceCodex.app"
 
