@@ -1,0 +1,20 @@
+cask "whisper-to-prompt" do
+  version "1.2.0"
+  sha256 "REPLACE_WITH_THE_DMG_SHA256"
+
+  url "https://github.com/o7eanturo/Whisper-to-Prompt/releases/download/v#{version}/Whisper-to-Prompt-#{version}.dmg"
+  name "Whisper to Prompt"
+  desc "Local macOS voice dictation for VS Code and Codex prompts"
+  homepage "https://github.com/o7eanturo/Whisper-to-Prompt"
+
+  depends_on arch: :arm64
+  depends_on macos: ">= :sonoma"
+
+  app "VoiceCodex.app"
+
+  caveats <<~EOS
+    Whisper to Prompt uses the local transcription model supplied by Handy.app.
+    Install Handy and download an on-device speech model before using the app.
+    Then allow Microphone and Accessibility access in System Settings.
+  EOS
+end

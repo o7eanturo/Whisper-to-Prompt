@@ -73,6 +73,10 @@ Resources/
 
 Scripts/
   package-app.sh
+  create-release-dmg.sh
+
+Packaging/
+  homebrew/whisper-to-prompt.rb.template
 
 Tests/
   VoiceCodexCoreTests/
@@ -97,6 +101,42 @@ Tests/
 - Optional submit via Enter
 - Accessibility permission check
 - Packaged app in `dist/VoiceCodex.app`
+
+## Install Like A Normal Mac App
+
+Releases are distributed as a `.dmg`. Open the downloaded image and drag
+`VoiceCodex.app` into `Applications` just like any regular macOS app.
+
+For a versioned release image:
+
+```sh
+chmod +x Scripts/create-release-dmg.sh
+Scripts/create-release-dmg.sh
+```
+
+This creates `dist/Whisper-to-Prompt-1.2.0.dmg`. Pushing a matching Git tag,
+for example `v1.2.0`, automatically builds the DMG and publishes it as a GitHub
+Release through the included workflow.
+
+The release is currently Apple-silicon-only and requires macOS Sonoma or newer.
+It also requires `Handy.app` with a local speech model because the current
+transcriber intentionally uses Handy's on-device model.
+
+### Homebrew (after the first GitHub Release)
+
+The correct future install command will be:
+
+```sh
+brew tap o7eanturo/tap
+brew install --cask whisper-to-prompt
+```
+
+Homebrew casks need a stable release URL and the exact SHA-256 of the DMG, so
+they cannot be published honestly before that first release exists. Copy
+`Packaging/homebrew/whisper-to-prompt.rb.template` into a separate
+`o7eanturo/homebrew-tap` repository as
+`Casks/whisper-to-prompt.rb`, replace its checksum with the one printed by the
+release script, then push the tap.
 
 ## Build And Start
 

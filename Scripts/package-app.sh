@@ -32,4 +32,7 @@ codesign \
   --sign - \
   --requirements '=designated => identifier "local.voicecodex.assistant"' \
   "$app"
-open "$app"
+
+if [[ "${OPEN_APP:-1}" == "1" ]]; then
+  open "$app"
+fi
